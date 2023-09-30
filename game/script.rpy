@@ -4,18 +4,19 @@
 # name of the character.
 
 define tp = Character("Teepee")
-define m = Character("Me", what_slow_cps=50)
+define m = Character("[name]", what_slow_cps=50)
 
 
 # The game starts here.
 
 label start:
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    $ name = renpy.input("What is your name?")
 
-    scene bg room
+    $ name = name.strip()
+
+    if name == "":
+        $ name = "Leon"
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -26,5 +27,16 @@ label start:
     m "(After a long freshers week, I've finally finished my first lecture...)"
     m "(It was in a fairly modern building called the Bedford Labs.)"
     m "(As I approach the door to leave, I can't help but notice someone loitering in the corner of the lobby.)"
+
+    with fade
+    scene bg lobby
+
+    m "(Who is that?)"
+
+    with fade
+    show teepee disgusted
+
+    tp "Who the fuck are you?"
+
 
     return
